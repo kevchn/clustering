@@ -1,0 +1,1245 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}393}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{math}
+          \PY{k+kn}{import} \PY{n+nn}{scipy}
+          
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{datasets}{%
+\section{Datasets}\label{datasets}}
+
+We have two datasets, mat1 and mat2, both consisting of 2 dimensional
+samples (700, 1400 respectively). We plot these on an 2D plot to examine
+our data before clustering.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}394}]:} \PY{n}{mat1} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data1.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{mat2} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data2.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}395}]:} \PY{n}{mat1}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{mat2}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}395}]:} ((2, 700), (2, 1400))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}396}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mat1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{mat1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matrix 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}397}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matrix 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-1-k-means-clustering}{%
+\section{Problem 1, K-Means
+Clustering}\label{problem-1-k-means-clustering}}
+
+We now try out K-means. K-means can only separate clusters by linear
+boundaries, so we expect mat1 to be unseparable by KMeans.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{k}{def} \PY{n+nf}{dist}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Euclidean distance \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}399}]:} \PY{k+kn}{import} \PY{n+nn}{copy}
+          
+          \PY{k}{def} \PY{n+nf}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+              \PY{n}{C\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+              \PY{n}{C\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+              \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{C\PYZus{}x}\PY{p}{,} \PY{n}{C\PYZus{}y}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+          
+              \PY{n}{C\PYZus{}old} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{C}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+              \PY{n}{clusters} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+              \PY{n}{error} \PY{o}{=} \PY{n}{dist}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{C\PYZus{}old}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+              
+              \PY{n}{flag} \PY{o}{=} \PY{k+kc}{True}
+              
+              \PY{k}{while} \PY{n}{error} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{distances} \PY{o}{=} \PY{n}{dist}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{C}\PY{p}{)}
+                      \PY{k}{if} \PY{n}{numpy}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{distances}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)} \PY{o+ow}{and} \PY{n}{flag}\PY{p}{:}
+                          \PY{n}{flag} \PY{o}{=} \PY{k+kc}{False}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{n}{distances}\PY{p}{)}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Coords: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+                      \PY{n}{cluster} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{distances}\PY{p}{)}
+                      \PY{n}{clusters}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{cluster}
+                  \PY{n}{C\PYZus{}old} \PY{o}{=} \PY{n}{copy}\PY{o}{.}\PY{n}{deepcopy}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{if} \PY{n}{clusters}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{)}
+                      \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                          \PY{n}{C}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{n}{C}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n}{error} \PY{o}{=} \PY{n}{dist}\PY{p}{(}\PY{n}{C}\PY{p}{,} \PY{n}{C\PYZus{}old}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{clusters}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}400}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title here}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{symbols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+              \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{if} \PY{n}{clusters}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{points}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{n}{symbols}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}401}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat1, k=2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}402}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat1, k=4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}403}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat1, k=8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}404}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat2, k=2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}405}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat2, k=4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    By inspection, we see that K-means clustering with 4 clusters
+successfully separates our mat2 data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}406}]:} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}means on mat2, k=8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-2-spectral-clustering}{%
+\section{Problem 2, Spectral
+Clustering}\label{problem-2-spectral-clustering}}
+
+Spectral clustering, or affinity-based clustering, can handle non
+linearly separable classes, so it may work on mat1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}407}]:} \PY{k}{def} \PY{n+nf}{similarity}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}693}]:} \PY{k}{def} \PY{n+nf}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{laplacian}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                  \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n}{D}\PY{o}{.}\PY{n}{flat}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{w} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{D}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{A}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{D}\PY{p}{)}
+              \PY{n}{L} \PY{o}{=} \PY{n}{laplacian}\PY{p}{(}\PY{n}{affinity}\PY{p}{)}
+              \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{eigvec} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{sparse}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eigs}\PY{p}{(}\PY{n}{L}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+              \PY{n}{X} \PY{o}{=} \PY{n}{eigvec}\PY{o}{.}\PY{n}{real}
+              \PY{n}{rows\PYZus{}norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{ord}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{labels} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T} \PY{o}{/} \PY{n}{rows\PYZus{}norm}\PY{p}{)}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+              \PY{k}{return} \PY{n}{labels}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1133}]:} \PY{k}{def} \PY{n+nf}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+               \PY{k}{def} \PY{n+nf}{squared\PYZus{}exponential}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sig}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{sig2}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                   \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Models smooth functions}
+           \PY{l+s+sd}{        }
+           \PY{l+s+sd}{        Function from previous spectral clustering project from tut \PYZdq{}\PYZdq{}\PYZdq{}}
+                   \PY{n}{norm} \PY{o}{=} \PY{n}{numpy}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}
+                   \PY{n}{dist} \PY{o}{=} \PY{n}{norm} \PY{o}{*} \PY{n}{norm}
+                   \PY{k}{return} \PY{n}{numpy}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{dist} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sig} \PY{o}{*} \PY{n}{sig2}\PY{p}{)}\PY{p}{)}
+               
+               \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+               \PY{n}{res} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{)}
+               \PY{n}{sig} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+               \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                   \PY{n}{dists} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                   \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                       \PY{n}{dists}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{X}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                   \PY{n}{dists}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+                   \PY{n}{sig}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dists}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+           
+               \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                   \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                       \PY{n}{res}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{squared\PYZus{}exponential}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{sig}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{sig}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+               \PY{k}{return} \PY{n}{res}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}555}]:} \PY{n}{affinity1} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}556}]:} \PY{n}{affinity1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}556}]:} array([[1.00000000e+000, 9.07373112e-068, 2.13806994e-067, {\ldots},
+                  3.75536786e-156, 6.45797708e-058, 3.80635345e-104],
+                 [9.07373112e-068, 1.00000000e+000, 1.28165649e-010, {\ldots},
+                  7.78220139e-177, 5.78066276e-003, 1.68477241e-160],
+                 [2.13806994e-067, 1.28165649e-010, 1.00000000e+000, {\ldots},
+                  5.33745514e-118, 5.21226973e-015, 3.01382806e-099],
+                 {\ldots},
+                 [3.75536786e-156, 7.78220139e-177, 5.33745514e-118, {\ldots},
+                  1.00000000e+000, 4.24887021e-210, 3.97603155e-019],
+                 [6.45797708e-058, 5.78066276e-003, 5.21226973e-015, {\ldots},
+                  4.24887021e-210, 1.00000000e+000, 1.23857683e-179],
+                 [3.80635345e-104, 1.68477241e-160, 3.01382806e-099, {\ldots},
+                  3.97603155e-019, 1.23857683e-179, 1.00000000e+000]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}697}]:} \PY{n}{k1} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat1, k=2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    By inspection, we see that spectral clustering with 2 clusters
+successfully separates our mat1 data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}521}]:} \PY{n}{s1}\PY{p}{,} \PY{n}{s2} \PY{o}{=} \PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}
+          \PY{n}{affinity1\PYZus{}1} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s1}\PY{p}{)}
+          \PY{n}{affinity1\PYZus{}2} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}522}]:} \PY{n}{s1\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{s2\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{n}{k2\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s1\PYZus{}labels}\PY{p}{,} \PY{n}{s2\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{k2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s1}\PY{p}{,} \PY{n}{s2}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{k2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{k2\PYZus{}labels}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat1 (split 1), k=4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}528}]:} \PY{n}{s3}\PY{p}{,} \PY{n}{s4}\PY{p}{,} \PY{n}{s5}\PY{p}{,} \PY{n}{s6} \PY{o}{=} \PY{n}{k2}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{k2\PYZus{}labels}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{k2}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{k2\PYZus{}labels}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{k2}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{2} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{k2\PYZus{}labels}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{k2}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{3} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{k2\PYZus{}labels}\PY{p}{]}\PY{p}{]}
+          \PY{n}{affinity1\PYZus{}3} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+          \PY{n}{affinity1\PYZus{}4} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s4}\PY{p}{)}
+          \PY{n}{affinity1\PYZus{}5} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s5}\PY{p}{)}
+          \PY{n}{affinity1\PYZus{}6} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}535}]:} \PY{n}{s3\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{s4\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{s5\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{s6\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{n}{k8\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s3\PYZus{}labels}\PY{p}{,} \PY{n}{s4\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{s5\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{s6\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{k8} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s3}\PY{p}{,} \PY{n}{s4}\PY{p}{,} \PY{n}{s5}\PY{p}{,} \PY{n}{s6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{k8}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{k8\PYZus{}labels}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat1 (split 2), k=8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{spectral-wrapper-functions}{%
+\paragraph{Spectral Wrapper
+Functions}\label{spectral-wrapper-functions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}592}]:} \PY{k}{def} \PY{n+nf}{spectral}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+              \PY{n}{affinity} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{M}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+              \PY{k}{return} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{M}
+          
+          \PY{k}{def} \PY{n+nf}{spectral4}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+              \PY{n}{Y}\PY{p}{,} \PY{n}{X} \PY{o}{=} \PY{n}{spectral}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+              \PY{n}{s1}\PY{p}{,} \PY{n}{s2} \PY{o}{=} \PY{n}{M}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}
+              \PY{n}{affinity1\PYZus{}1} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s1}\PY{p}{)}
+              \PY{n}{affinity1\PYZus{}2} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s2}\PY{p}{)}
+              \PY{n}{s1\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{s2\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{k2\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{s1\PYZus{}labels}\PY{p}{,} \PY{n}{s2\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{k2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s1}\PY{p}{,} \PY{n}{s2}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{Y}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{k2\PYZus{}labels}\PY{p}{,} \PY{n}{k2}
+          
+          \PY{k}{def} \PY{n+nf}{spectral8}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+              \PY{n}{Y1}\PY{p}{,} \PY{n}{X1}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{X} \PY{o}{=} \PY{n}{spectral4}\PY{p}{(}\PY{n}{M}\PY{p}{)}
+              \PY{n}{s3}\PY{p}{,} \PY{n}{s4}\PY{p}{,} \PY{n}{s5}\PY{p}{,} \PY{n}{s6} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{0} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{1} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{2} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{[}\PY{k+kc}{True} \PY{k}{if} \PY{n}{y}\PY{o}{==}\PY{l+m+mi}{3} \PY{k}{else} \PY{k+kc}{False} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{Y}\PY{p}{]}\PY{p}{]}
+              \PY{n}{affinity1\PYZus{}3} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s3}\PY{p}{)}
+              \PY{n}{affinity1\PYZus{}4} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s4}\PY{p}{)}
+              \PY{n}{affinity1\PYZus{}5} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s5}\PY{p}{)}
+              \PY{n}{affinity1\PYZus{}6} \PY{o}{=} \PY{n}{compute\PYZus{}affinity}\PY{p}{(}\PY{n}{s6}\PY{p}{)}
+              
+              \PY{n}{s3\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{s4\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{s5\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{s6\PYZus{}labels} \PY{o}{=} \PY{n}{spectral\PYZus{}clustering}\PY{p}{(}\PY{n}{affinity1\PYZus{}6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          
+              \PY{n}{k8\PYZus{}labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s3\PYZus{}labels}\PY{p}{,} \PY{n}{s4\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{s5\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{s6\PYZus{}labels}\PY{o}{+}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+              \PY{n}{k8} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{s3}\PY{p}{,} \PY{n}{s4}\PY{p}{,} \PY{n}{s5}\PY{p}{,} \PY{n}{s6}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{n}{Y1}\PY{p}{,} \PY{n}{X1}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{k8\PYZus{}labels}\PY{p}{,} \PY{n}{k8}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}593}]:} \PY{n}{Y1}\PY{p}{,} \PY{n}{X1}\PY{p}{,} \PY{n}{Y4}\PY{p}{,} \PY{n}{X4}\PY{p}{,} \PY{n}{Y8}\PY{p}{,} \PY{n}{X8} \PY{o}{=} \PY{n}{spectral8}\PY{p}{(}\PY{n}{mat2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}595}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{Y1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat2, k=2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}598}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{X4}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{Y4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat2, k=4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}600}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{X8}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{Y8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spectral on mat2, k=8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-3-comparison-with-cost-functions}{%
+\section{Problem 3: Comparison with Cost
+Functions}\label{problem-3-comparison-with-cost-functions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}677}]:} \PY{k}{def} \PY{n+nf}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{:}
+              \PY{n}{Je} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n}{classes}\PY{p}{:}
+                  \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cl}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{cl}\PY{p}{:}
+                      \PY{n}{Je} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{inner}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{,} \PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}
+              \PY{k}{return} \PY{n}{Je}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}724}]:} \PY{k}{def} \PY{n+nf}{determinant}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{:}
+              \PY{n}{S\PYZus{}W} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n}{classes}\PY{p}{:}
+                  \PY{n}{mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cl}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n}{S\PYZus{}i} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{cl}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{S\PYZus{}i} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{outer}\PY{p}{(}\PY{n}{cl}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{,} \PY{n}{cl}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mean}\PY{p}{)}
+                  \PY{n}{S\PYZus{}W} \PY{o}{+}\PY{o}{=} \PY{n}{S\PYZus{}i}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{S\PYZus{}W}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}751}]:} \PY{k+kn}{import} \PY{n+nn}{itertools} \PY{k}{as} \PY{n+nn}{it}
+          
+          \PY{k}{def} \PY{n+nf}{min\PYZus{}variance}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{:}
+              \PY{n}{Je} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n}{classes}\PY{p}{:}
+                  \PY{n}{si} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{inner}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{,}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{)} \PY{k}{for} \PY{n}{x}\PY{p}{,}\PY{n}{y} \PY{o+ow}{in} \PY{n}{it}\PY{o}{.}\PY{n}{combinations}\PY{p}{(}\PY{n}{cl}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{Je} \PY{o}{+}\PY{o}{=} \PY{n}{si}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{cl}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{return} \PY{n}{Je}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}737}]:} \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+              \PY{n}{arr} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{arr}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+              \PY{k}{return} \PY{n}{arr}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python3.6/site-packages/numpy/core/\_methods.py:80: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}744}]:} \PY{n}{M2C2KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{M2C4KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{M2C8KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n}{M2C2Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{X1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{Y1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{M2C4Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{X4}\PY{p}{,} \PY{n}{Y4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{M2C8Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{X8}\PY{p}{,} \PY{n}{Y8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+          
+          \PY{n}{M1C2KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{M1C4KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{M1C8KMeans} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{kmeans}\PY{p}{(}\PY{n}{mat1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n}{M1C2Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat1}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{k1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{M1C4Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{k2}\PY{p}{,} \PY{n}{k2\PYZus{}labels}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{M1C8Spectral} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{k8}\PY{p}{,} \PY{n}{k8\PYZus{}labels}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}743}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+          \PY{n}{e2} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+          \PY{n}{e3} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+          \PY{n}{e4} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+          \PY{n}{e5} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+          \PY{n}{e6} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+          
+          \PY{n}{e7} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C2KMeans}\PY{p}{)}
+          \PY{n}{e8} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C4KMeans}\PY{p}{)}
+          \PY{n}{e9} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C8KMeans}\PY{p}{)}
+          \PY{n}{e10} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C2Spectral}\PY{p}{)}
+          \PY{n}{e11} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C4Spectral}\PY{p}{)}
+          \PY{n}{e12} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M1C8Spectral}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python3.6/site-packages/numpy/core/\_methods.py:80: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+
+    \end{Verbatim}
+
+    \hypertarget{sum-squared-error}{%
+\subsubsection{Sum Squared Error}\label{sum-squared-error}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}738}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum Squared Error, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Sum Squared Error, Dataset 2
+C=2 | KMeans: 11523.462641572416 Spectral: 12980.544476534591
+C=4 | KMeans: 1308.589852762342 Spectral: 1367.4907262152626
+C=8 | KMeans: 1249.690428419723 Spectral: 556.4301312921771
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}739}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum Squared Error, Dataset 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e10}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e11}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e12}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Sum Squared Error, Dataset 1
+C=2 | KMeans: 131904.90415142267 Spectral: 207710.95870316675
+C=4 | KMeans: 67243.97450008814 Spectral: 129584.95960087515
+C=8 | KMeans: 20491.671457244076 Spectral: 44623.695784612944
+
+    \end{Verbatim}
+
+    \hypertarget{discussion}{%
+\paragraph{Discussion}\label{discussion}}
+
+These results do not compare well with the visual observations given by
+the above clustering algorithms. When we increase the number of
+clusters, the numerical error obviously decreases. However, we see that
+dataset 1 (mat1) obviously has only 2 classes, so k=2 is the best (and
+is visually so, with the spectral clustering), but the numerical error
+decreases as we increase k. For dataset 2 which is linearly separable,
+KMeans and Spectral almost perform the same. This is not the case for
+dataset 1, where with K=2 Spectral successfully separates the clusters
+but KMeans does not. And yet, Spectral's sum squared error is 207710
+\textgreater{} KMean's SSE of 139335.
+
+    \hypertarget{determinant}{%
+\subsubsection{Determinant}\label{determinant}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}745}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+          \PY{n}{e2} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+          \PY{n}{e3} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+          \PY{n}{e4} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+          \PY{n}{e5} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+          \PY{n}{e6} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+          
+          \PY{n}{e7} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C2KMeans}\PY{p}{)}
+          \PY{n}{e8} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C4KMeans}\PY{p}{)}
+          \PY{n}{e9} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C8KMeans}\PY{p}{)}
+          \PY{n}{e10} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C2Spectral}\PY{p}{)}
+          \PY{n}{e11} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C4Spectral}\PY{p}{)}
+          \PY{n}{e12} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M1C8Spectral}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python3.6/site-packages/numpy/core/\_methods.py:80: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}746}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Determinant, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Determinant, Dataset 2
+C=2 | KMeans: 8107128.413448382 Spectral: 26358947.80734672
+C=4 | KMeans: 145456.4670150636 Spectral: 446531.7034244581
+C=8 | KMeans: 84989.73206552764 Spectral: 72199.32401656003
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}747}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Determinant, Dataset 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e10}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e11}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e12}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Determinant, Dataset 1
+C=2 | KMeans: 3285283551.736198 Spectral: 10751492347.651451
+C=4 | KMeans: 975897318.337423 Spectral: 2557848611.074802
+C=8 | KMeans: 120141496.7612552 Spectral: 494209586.2569458
+
+    \end{Verbatim}
+
+    \hypertarget{min-variance}{%
+\subsubsection{Min Variance}\label{min-variance}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}753}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+          \PY{n}{e2} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+          \PY{n}{e3} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+          \PY{n}{e4} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+          \PY{n}{e5} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+          \PY{n}{e6} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+          
+          \PY{n}{e7} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C2KMeans}\PY{p}{)}
+          \PY{n}{e8} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C4KMeans}\PY{p}{)}
+          \PY{n}{e9} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C8KMeans}\PY{p}{)}
+          \PY{n}{e10} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C2Spectral}\PY{p}{)}
+          \PY{n}{e11} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C4Spectral}\PY{p}{)}
+          \PY{n}{e12} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M1C8Spectral}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:7: RuntimeWarning: invalid value encountered in double\_scalars
+  import sys
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}756}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Min Variance, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min Variance, Dataset 2
+C=2 | KMeans: 11523.46264157244 Spectral: 12980.544476534602
+C=4 | KMeans: 955.5036139177143 Spectral: 1367.4907262152633
+C=8 | KMeans: 637.8077128578185 Spectral: nan
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}757}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Min Variance, Dataset 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e10}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e11}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e12}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min Variance, Dataset 1
+C=2 | KMeans: 131839.5046818803 Spectral: 207710.95870316686
+C=4 | KMeans: 63969.713173109674 Spectral: 129584.9596008751
+C=8 | KMeans: 22066.58996087212 Spectral: 44623.69578461293
+
+    \end{Verbatim}
+
+    \hypertarget{discussion}{%
+\paragraph{Discussion}\label{discussion}}
+
+We also note that Min Variance and Sum Squared Error are equivalent in
+this case.
+
+    \hypertarget{problem-4-expectation-maximization}{%
+\section{Problem 4: Expectation
+Maximization}\label{problem-4-expectation-maximization}}
+
+We use expectation maximization with gaussian assumption (gaussian
+mixture model) to find parameters (means, covariances, and priors) for
+the gaussian PDF. Once we converge (or in this case, run for 100
+iterations), we use the last cluster result as our clustering.
+
+This should be the slower of the three algorithms on this dataset
+without algorithmic optimization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}761}]:} \PY{n}{mat2}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}761}]:} (2, 1400)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}781}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} find priors, means, and covariances}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2
+3
+4
+5
+6
+7
+8
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1081}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{multivariate\PYZus{}normal}
+           
+           \PY{k}{def} \PY{n+nf}{prob}\PY{p}{(}\PY{n}{val}\PY{p}{,} \PY{n}{mean}\PY{p}{,} \PY{n}{cov}\PY{p}{,} \PY{n}{prior}\PY{p}{)}\PY{p}{:}
+               \PY{n}{p} \PY{o}{=} \PY{n}{prior}
+               \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                   \PY{k}{try}\PY{p}{:}
+                       \PY{n}{p} \PY{o}{*}\PY{o}{=} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{cov}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                   \PY{k}{except} \PY{n+ne}{IndexError}\PY{p}{:}
+                       \PY{n}{p} \PY{o}{*}\PY{o}{=} \PY{l+m+mf}{1.0}
+               \PY{k}{return} \PY{n}{p}
+\end{Verbatim}
+
+
+    \hypertarget{part-a-expectation-maximization}{%
+\subsubsection{Part A: Expectation
+Maximization}\label{part-a-expectation-maximization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1094}]:} \PY{n}{C\PYZus{}results} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+           
+           \PY{k}{for} \PY{n}{C} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{:}
+               \PY{c+c1}{\PYZsh{} initial parameters}
+               \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+               \PY{n}{covs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+               \PY{n}{priors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{c}\PY{p}{]} \PY{o}{*} \PY{n}{C}\PY{p}{)}
+           
+               \PY{n}{clusters} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+               \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                   \PY{c+c1}{\PYZsh{} evaluate most likely clusters for every point, given current parameters}
+                   \PY{n}{clusters}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                   \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                       \PY{n}{point} \PY{o}{=} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                       \PY{n}{cluster} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{p}{[}\PY{n}{prob}\PY{p}{(}\PY{n}{point}\PY{p}{,} \PY{n}{means}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{,} \PY{n}{covs}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{,} \PY{n}{priors}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                       \PY{n}{clusters}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cluster}\PY{p}{)}
+           
+                   \PY{c+c1}{\PYZsh{} reestimate parameters given current clusters}
+                   \PY{n}{assignments} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{o}{==}\PY{n}{i}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{clusters} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                   \PY{n}{populations} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{assignments}\PY{p}{]}\PY{p}{)}
+                   \PY{n}{ratios} \PY{o}{=} \PY{n}{populations} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{populations}\PY{p}{)}
+           
+                   \PY{n}{means} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{assignments}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{assignments}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{clusters} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                   \PY{n}{covs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{assignments}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{assignments}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{clusters} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                   \PY{n}{priors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ratios}\PY{p}{)}
+               
+               \PY{c+c1}{\PYZsh{} get final clusters}
+               \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                   \PY{n}{point} \PY{o}{=} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{mat2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                   \PY{n}{cluster} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{p}{[}\PY{n}{prob}\PY{p}{(}\PY{n}{point}\PY{p}{,} \PY{n}{means}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{,} \PY{n}{covs}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{,} \PY{n}{priors}\PY{p}{[}\PY{n}{cl}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{cl} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{C}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                   \PY{n}{clusters}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cluster}\PY{p}{)}
+               \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{n}{C}\PY{p}{]} \PY{o}{=} \PY{n}{clusters}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covs}\PY{p}{,} \PY{n}{priors}
+\end{Verbatim}
+
+
+    We use 10 iterations instead of 100 because of computer heating issues,
+and because of reasonable convergence with 10 iterations.
+
+    \hypertarget{part-b-clustering}{%
+\subsubsection{Part B: Clustering}\label{part-b-clustering}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1095}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EM on mat2, k=2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1096}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EM on mat2, k=4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1097}]:} \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{mat2}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{EM on mat2, k=8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comparison-with-cost-functions}{%
+\subsubsection{Comparison with Cost
+Functions}\label{comparison-with-cost-functions}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1116}]:} \PY{n}{M2C2EM} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1400}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+           \PY{n}{M2C4EM} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1400}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+           \PY{n}{M2C8EM} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{mat2}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{C\PYZus{}results}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1400}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1130}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+           \PY{n}{e2} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+           \PY{n}{e3} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+           \PY{n}{e4} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+           \PY{n}{e5} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+           \PY{n}{e6} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+           \PY{n}{e7} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C2EM}\PY{p}{)}
+           \PY{n}{e8} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C4EM}\PY{p}{)}
+           \PY{n}{e9} \PY{o}{=} \PY{n}{sum\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{M2C8EM}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python3.6/site-packages/numpy/core/\_methods.py:80: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1118}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sum Squared Error, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Sum Squared Error, Dataset 2
+C=2 | KMeans: 11523.462641572429 Spectral: 12980.544476534591 EM: 19650.16853656148
+C=4 | KMeans: 955.5036139177154 Spectral: 1367.4907262152626 EM: 8523.805188355976
+C=8 | KMeans: 637.8077128578192 Spectral: 556.4301312921771 EM: 877.5695135612715
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1126}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+           \PY{n}{e2} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+           \PY{n}{e3} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+           \PY{n}{e4} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+           \PY{n}{e5} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+           \PY{n}{e6} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+           \PY{n}{e7} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C2EM}\PY{p}{)}
+           \PY{n}{e8} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C4EM}\PY{p}{)}
+           \PY{n}{e9} \PY{o}{=} \PY{n}{min\PYZus{}variance}\PY{p}{(}\PY{n}{M2C8EM}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:7: RuntimeWarning: invalid value encountered in double\_scalars
+  import sys
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1131}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Min Variance, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min Variance, Dataset 2
+C=2 | KMeans: 11523.462641572429 Spectral: 12980.544476534591 EM: 19650.16853656148
+C=4 | KMeans: 955.5036139177154 Spectral: 1367.4907262152626 EM: 8523.805188355976
+C=8 | KMeans: 637.8077128578192 Spectral: 556.4301312921771 EM: 877.5695135612715
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1128}]:} \PY{n}{e1} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C2KMeans}\PY{p}{)}
+           \PY{n}{e2} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C4KMeans}\PY{p}{)}
+           \PY{n}{e3} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C8KMeans}\PY{p}{)}
+           \PY{n}{e4} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C2Spectral}\PY{p}{)}
+           \PY{n}{e5} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C4Spectral}\PY{p}{)}
+           \PY{n}{e6} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C8Spectral}\PY{p}{)}
+           \PY{n}{e7} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C2EM}\PY{p}{)}
+           \PY{n}{e8} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C4EM}\PY{p}{)}
+           \PY{n}{e9} \PY{o}{=} \PY{n}{determinant}\PY{p}{(}\PY{n}{M2C8EM}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/site-packages/numpy/core/fromnumeric.py:2957: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/usr/local/lib/python3.6/site-packages/numpy/core/\_methods.py:80: RuntimeWarning: invalid value encountered in double\_scalars
+  ret = ret.dtype.type(ret / rcount)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1129}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Min Variance, Dataset 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=2 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e1}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e4}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e7}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=4 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e2}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e5}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e8}\PY{p}{)}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C=8 | KMeans: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e3}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Spectral: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e6}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ EM: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e9}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min Variance, Dataset 2
+C=2 | KMeans: 8107128.413448382 Spectral: 26358947.80734672 EM: 64168696.66829248
+C=4 | KMeans: 145456.4670150636 Spectral: 446531.7034244581 EM: 6951116.3744544815
+C=8 | KMeans: 84989.73206552764 Spectral: 72199.32401656003 EM: 128323.23851540437
+
+    \end{Verbatim}
+
+    \hypertarget{problem-5-hmms}{%
+\section{Problem 5: HMMs}\label{problem-5-hmms}}
+
+    \hypertarget{transitions}{%
+\paragraph{Transitions}\label{transitions}}
+
+P(S1\textbar{}S1) = 0.8,P(S2\textbar{}S1) = 0.2,P(S1\textbar{}S2) =
+0.2,P(S2\textbar{}S2) = 0.8
+
+    \hypertarget{emissions}{%
+\paragraph{Emissions}\label{emissions}}
+
+P(A\textbar{}S1) = 0.4,P(C\textbar{}S1) = 0.1,P(G\textbar{}S1) =
+0.4,P(T\textbar{}S1) = 0.1
+
+P(A\textbar{}S2) = 0.1,P(C\textbar{}S2) = 0.4,P(G\textbar{}S2) =
+0.1,P(T\textbar{}S2) = 0.4
+
+    \hypertarget{priors}{%
+\paragraph{Priors}\label{priors}}
+
+P(S1) = 0.5, P(S2) = 0.5
+
+    Please see the \texttt{P5.pdf}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
